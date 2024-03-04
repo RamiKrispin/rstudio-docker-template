@@ -5,6 +5,13 @@
 The repository provides a template for setting a dockerized development environment with Rstudio. The template is based on the Rocker's RStudio image with an additional customization layer.
 
 
+<br>
+<figure>
+ <img src="images/rstudio.png" width="100%" align="center"/></a>
+</figure>
+</br>
+
+
 ## Settings
 
 This repository has the following structure:
