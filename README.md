@@ -2,7 +2,7 @@
 
 🚧WIP 🏗️, pre spell checking🛠️
 
-The repository provides a template for setting a dockerized development environment with Rstudio. The template is based on the Rocker's RStudio image with an additional customization layer.
+The repository provides a template for launching an RStudio Server in a container with the local RStudio settings (i.e., code snippets, color theme, environment variables, etc.). The template leverages the [Rocker Project](https://rocker-project.org/) built-in RStudio image with an additional customization layer.
 
 
 <br>
