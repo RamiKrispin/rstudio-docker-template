@@ -1,46 +1,88 @@
 # RStudio Docker Template
 
-The repository provides a temlate for setting a dockerized deveopment environment with Rstudio. The template is based on the Rocker RStudio image, with addition customization layer.
+🚧WIP 🏗️, pre spell checking🛠️
+
+The repository provides a template for setting a dockerized development environment with Rstudio. The template is based on the Rocker's RStudio image with an additional customization layer.
 
 
-## Tutorial
+## Settings
 
-# Setting and Customizing RStudio Inside Docker
+This repository has the following structure:
 
-INTRO
+```shell
+.
+├── README.md
+├── docker
+│   ├── Dockerfile
+│   ├── build_image.sh
+│   ├── install_packages.R
+│   ├── packages.json
+│   └── set_dependencies.sh
+└── docker-compose.yml
+```
 
-Table of content
-- Using the Rocker image
-- Mounting Local Folders
-- Loading your Settings
-- Customizing with Docker Compose
-
-## Running RStudio Inside a Container
-
-RStudio is the main IDE for the R programming lanague. It was built and desinged to fit for the needs of the R users, and that what makes it so popular among the R users community. By default, RStudio does not have a native support for Docker.  If you want to run RStudio inside a dockerized environment you will have to set install an RStudio server inside a container. This increase the barrier of entry for many R users. Luckely, the Rocker project - the main source for R images provides a built-in and ready to use image with RStudio server
-
-as oppsed to a general purpose IDEs such VScode. 
-
-
-If you are using R it is most likely that you are using RStudio as IDE. 
-
-Unlike other IDEs such as VScode, which is a general purpose IDE, the RStudio was built for R language and that is the main reason why it is so popular among 
+The `docker` folder contains the docker template for adding new packages and the `docker-compose.yml` file has the RStudio container launch settings.
 
 
-does not have a native support or integration for Docker, but if you want to run it 
+## Launching RStudio with Docker Compose
+
+The `docker-compose.yml` file provides a concise form for the below `docker run` command:
 
 
-## Using the Rocker Image
+```shell
+docker run --rm -ti \
+-v .:/home/rstudio \
+-v $HOME/.config/rstudio:/home/rstudio/.config/rstudio \
+-v $HOME/.Renviron:/home/rstudio/.Renviron \
+-e PASSWORD=password \
+-p 8787:8787 rocker/rstudio
+```
 
-The Rocker project is the main source for R images. It provides
+This includes the following functionality:
+- Launching the Rocker container - `rocker/rstudio:4.3.2` in an interactive mode
+- Mount the local folder to the container home folder
+- Mount the local RStudio settings and `.Renviron` file
+- Set the login password as a `password`. By default, the login username is `rstudio`
+- Map the local port `8787` with the container exposed port - `8787` 
 
-## Mounting Local Folders
+
+`docker-compose.yml`
+``` yaml
+version: "3.9"
+services:
+  rstudio:
+    image: "rocker/rstudio:4.3.2"
+    ports:
+      - "8787:8787"
+    volumes:
+      - type: "bind"
+        source: "."
+        target: "/home/rstudio"
+      - type: "bind"
+        source: "$HOME/.config/rstudio"
+        target: "/home/rstudio/.config/rstudio"
+      - type: "bind"
+        source: "$HOME/.Renviron"
+        target: "/home/rstudio/.Renviron"
+    environment:
+      - PASSWORD=yourpassword
+```
+
+**Note:** This docker-compose setting mounts the local folder to the container. You can customize it by modifying the `source` argument under the first `bind` section to the preferred folder path.
+
+## Customize the Image
+
+WIP
+
+## Resources
+
+- Running RStudio Inside a Container - TBD
+- RStudio - https://posit.co/products/open-source/rstudio/
+- The Rocker Project - https://rocker-project.org/
 
 
-## Loading Your Local Rstudio Settings
+## License
 
-
-## Customizing with Docker Compose
-
+This template is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/) License.
 
 

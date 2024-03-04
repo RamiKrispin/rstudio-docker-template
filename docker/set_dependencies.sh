@@ -2,7 +2,9 @@
 
 apt-get update && apt-get install -y --no-install-recommends \
     jq \
+    libxml2-dev \
+    libgit2-dev \
      && rm -rf /var/lib/apt/lists/*
 
 
-Rscript install_packages.R
+Rscript settings/install_packages.R

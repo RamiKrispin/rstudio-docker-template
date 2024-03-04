@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   rstudio:
-    image: "rocker/rstudio"
+    image: "rocker/rstudio:4.3.2"
     ports:
       - "8787:8787"
     volumes:
@@ -9,7 +9,7 @@ services:
         source: "."
         target: "/home/rstudio"
       - type: "bind"
-        source: "$RSTUDIO_CONFIG_PATH"
+        source: "$HOME/.config/rstudio"
         target: "/home/rstudio/.config/rstudio"
       - type: "bind"
         source: "$HOME/.Renviron"
