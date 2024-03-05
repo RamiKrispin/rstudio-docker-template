@@ -79,7 +79,20 @@ services:
 
 ## Customize the Image
 
-WIP
+The docker folder provides the settings for building an image on top of the rocker/rstudio image. This enables you to customize your environment and add additional libraries and other dependencies. This includes the following files:
+- `build_image.sh` - a Bash script to build and push the image
+- `set_dependencies.sh` - a Bash script that installs the image dependencies during the build time. This includes leveraging the following scripts:
+    - `install_packages.R` - an R script to install R packages during the image build time
+    - `packages.json` - a JSON file with the list of packages and their versions to install by the `install_packages.R` file
+
+To build the image you will need have [jq](https://jqlang.github.io/jq/) installed to parse the JSON file. 
+
+
+The `build_image.sh` script has one argument - the image name. For example, the below code will build and name the image as `rkrispin/rstudio-customize:dev`:
+
+```shell
+bash build_image.sh rkrispin/rstudio-customize:dev
+```
 
 ## Resources
 
